@@ -1,0 +1,24 @@
+import networkx as nx
+import numpy as np
+
+def getSobvecCentrality(matrix):
+    graph = nx.from_numpy_array(matrix)
+    return nx.eigenvector_centrality(graph)
+
+testGraph = np.array([
+    [0, 1, 1, 1],
+    [1, 0, 0, 1],
+    [1, 0, 0, 1],
+    [1, 1, 1, 0]
+])
+
+print("\nМатрица смежности:")
+print(testGraph)
+
+centralityValues = getSobvecCentrality(testGraph)
+
+print("\nВывод:")
+for node, val in sorted(centralityValues.items()):
+    print(f"Узел {node}: {val:.4f}")
+
+print(f"\nНабиольшая мера центральности: {max(centralityValues, key=centralityValues.get)}")
